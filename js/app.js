@@ -4,7 +4,7 @@
    Imágenes: WebP optimizadas + fallback JPG
    ========================================================= */
 
-const NUMERO_WHATSAPP = "573000000000";
+const NUMERO_WHATSAPP = "573224047068";
 
 /* =========================================================
    PRODUCTOS
