@@ -61,6 +61,20 @@ a {
     color: var(--blanco);
 }
 
+/*
+   Accesibilidad: outline visible al navegar con teclado (Tab),
+   sin mostrarlo en clics de mouse (:focus-visible se encarga
+   de eso automáticamente).
+*/
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+    outline: 2px solid var(--rojo);
+    outline-offset: 2px;
+}
+
 
 /* =========================================================
    BARRA DE NAVEGACIÓN
@@ -348,6 +362,8 @@ a {
     justify-content: center;
 
     z-index: 2;
+
+    overflow: hidden;
 }
 
 .hero-imagen-contenedor {
@@ -401,10 +417,21 @@ a {
     transform: rotate(-5deg);
 
     transition: transform 0.5s ease;
+
+    overflow: hidden;
 }
 
 .hero-plato:hover {
     transform: rotate(0deg) scale(1.03);
+}
+
+.hero-foto {
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+
+    display: block;
 }
 
 .plato-placeholder {
@@ -863,6 +890,10 @@ a {
     margin-bottom: 25px;
 }
 
+/*
+   Nota: antes esta regla estaba duplicada más abajo en el archivo
+   (una segunda vez, solo para sumarle z-index). Queda unificada aquí.
+*/
 .combo-imagen {
     position: absolute;
 
@@ -875,6 +906,8 @@ a {
     display: flex;
     align-items: center;
     justify-content: center;
+
+    z-index: 1;
 }
 
 .combo-placeholder {
@@ -910,6 +943,31 @@ a {
 
     text-transform: uppercase;
     letter-spacing: 2px;
+}
+
+.combo-foto {
+    width: 360px;
+    height: 360px;
+
+    max-width: 80%;
+    max-height: 80%;
+
+    display: block;
+
+    object-fit: cover;
+    object-position: center;
+
+    border-radius: 50%;
+
+    transform: rotate(7deg);
+
+    transition: transform 0.5s ease;
+
+    overflow: hidden;
+}
+
+.combo-card:hover .combo-foto {
+    transform: rotate(0deg) scale(1.03);
 }
 
 
@@ -1097,10 +1155,15 @@ footer p {
     font-size: 0.8rem;
 }
 
+/*
+   Antes tenía !important en ambas propiedades. No hacía falta:
+   .footer-demo (una clase) ya gana por especificidad sobre
+   "footer p" (dos elementos), así que se quitó el !important.
+*/
 .footer-demo {
-    color: #444444 !important;
+    color: #444444;
 
-    font-size: 0.7rem !important;
+    font-size: 0.7rem;
 }
 
 
@@ -1596,6 +1659,88 @@ footer p {
 
 
 /* =========================================================
+   SELECTOR DE VARIANTES
+   ========================================================= */
+
+.variante-opcion {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 12px;
+    margin-bottom: 7px;
+    border: 1px solid #dddddd;
+    border-radius: 10px;
+    background: #ffffff;
+    color: #222222;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.variante-opcion:hover {
+    border-color: #ef2029;
+    background: #fff5f5;
+}
+
+.variante-opcion input[type="radio"] {
+    margin: 0;
+    width: 17px;
+    height: 17px;
+    accent-color: #ef2029;
+    flex-shrink: 0;
+}
+
+.variante-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    gap: 15px;
+    color: #222222;
+}
+
+.variante-nombre {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: #222222;
+}
+
+.variante-precio {
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: #ef2029;
+    white-space: nowrap;
+}
+
+/* Modal de selección de arroz */
+
+#modalVariantes .modal-dialog {
+    max-width: 430px;
+}
+
+#modalVariantes .modal-content {
+    border-radius: 16px;
+    overflow: hidden;
+}
+
+#modalVariantes .modal-header {
+    padding: 16px 20px;
+}
+
+#modalVariantes .modal-title {
+    font-size: 1.15rem;
+    font-weight: 700;
+}
+
+#modalVariantes .modal-body {
+    padding: 18px 20px;
+}
+
+#modalVariantes .modal-footer {
+    padding: 12px 20px;
+}
+
+
+/* =========================================================
    RESPONSIVE — TABLET
    ========================================================= */
 
@@ -1867,12 +2012,15 @@ footer p {
         min-height: auto;
 
         flex-direction: column;
+        align-items: stretch;
+
+        border: none;
     }
 
     .combo-contenido {
         width: 100%;
 
-        padding: 35px 22px;
+        padding: 35px 25px 10px;
     }
 
     .combo-contenido h2 {
@@ -1889,7 +2037,16 @@ footer p {
         width: 100%;
         height: 250px;
 
-        padding-bottom: 30px;
+        right: auto;
+        top: auto;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        padding: 10px 20px 25px;
+
+        overflow: hidden;
     }
 
     .combo-placeholder {
@@ -1899,6 +2056,27 @@ footer p {
 
     .combo-placeholder i {
         font-size: 3rem;
+    }
+
+    .combo-foto {
+        width: 240px;
+        height: 240px;
+
+        max-width: 85%;
+        max-height: 85%;
+
+        object-fit: cover;
+        object-position: center;
+
+        border-radius: 50%;
+
+        transform: rotate(7deg);
+
+        transition: transform 0.5s ease;
+    }
+
+    .combo-card:hover .combo-foto {
+        transform: rotate(0deg) scale(1.03);
     }
 
 
@@ -2024,199 +2202,5 @@ footer p {
 
     .combo-contenido {
         padding: 28px 18px;
-    }
-}
-
-/* =========================================
-   SELECTOR DE VARIANTES
-   ========================================= */
-
-.variante-opcion {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    padding: 10px 12px;
-    margin-bottom: 7px;
-    border: 1px solid #dddddd;
-    border-radius: 10px;
-    background: #ffffff;
-    color: #222222 !important;
-    cursor: pointer;
-    transition: all 0.2s ease;
-}
-
-.variante-opcion:hover {
-    border-color: #ef2029;
-    background: #fff5f5;
-}
-
-.variante-opcion input[type="radio"] {
-    margin: 0;
-    width: 17px;
-    height: 17px;
-    accent-color: #ef2029;
-    flex-shrink: 0;
-}
-
-.variante-info {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 100%;
-    gap: 15px;
-    color: #222222 !important;
-}
-
-.variante-nombre {
-    font-size: 0.9rem;
-    font-weight: 600;
-    color: #222222 !important;
-}
-
-.variante-precio {
-    font-size: 0.9rem;
-    font-weight: 700;
-    color: #ef2029 !important;
-    white-space: nowrap;
-}
-
-/* Modal de selección de arroz */
-
-#modalVariantes .modal-dialog {
-    max-width: 430px;
-}
-
-#modalVariantes .modal-content {
-    border-radius: 16px;
-    overflow: hidden;
-}
-
-#modalVariantes .modal-header {
-    padding: 16px 20px;
-}
-
-#modalVariantes .modal-title {
-    font-size: 1.15rem;
-    font-weight: 700;
-}
-
-#modalVariantes .modal-body {
-    padding: 18px 20px;
-}
-
-#modalVariantes .modal-footer {
-    padding: 12px 20px;
-}
-
-.hero-plato {
-    overflow: hidden;
-}
-
-.hero-foto {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
-}
-
-.hero-imagen {
-    overflow: hidden;
-}.combo-imagen {
-    position: absolute;
-
-    width: 45%;
-    height: 100%;
-
-    right: 0;
-    top: 0;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    z-index: 1;
-}
-
-.combo-foto {
-    width: 360px;
-    height: 360px;
-
-    max-width: 80%;
-    max-height: 80%;
-
-    display: block;
-
-    object-fit: cover;
-    object-position: center;
-
-    border-radius: 50%;
-
-    transform: rotate(7deg);
-
-    transition: transform 0.5s ease;
-
-    overflow: hidden;
-}
-
-.combo-card:hover .combo-foto {
-    transform: rotate(0deg) scale(1.03);
-}
-
-
-/* =========================================================
-   COMBO — MÓVIL
-   ========================================================= */
-
-@media (max-width: 767px) {
-
-    .combo-card {
-        min-height: auto;
-        flex-direction: column;
-        align-items: stretch;
-        border: none;
-    }
-
-    .combo-contenido {
-        width: 100%;
-        padding: 35px 25px 10px;
-    }
-
-    .combo-imagen {
-        position: relative;
-
-        width: 100%;
-        height: 250px;
-
-        right: auto;
-        top: auto;
-
-        display: flex;
-        align-items: center;
-        justify-content: center;
-
-        padding: 10px 20px 25px;
-
-        overflow: hidden;
-    }
-
-    .combo-foto {
-        width: 240px;
-        height: 240px;
-
-        max-width: 85%;
-        max-height: 85%;
-
-        object-fit: cover;
-        object-position: center;
-
-        border-radius: 50%;
-
-        transform: rotate(7deg);
-
-        transition: transform 0.5s ease;
-    }
-
-    .combo-card:hover .combo-foto {
-        transform: rotate(0deg) scale(1.03);
     }
 }
