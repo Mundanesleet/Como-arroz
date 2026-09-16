@@ -2121,8 +2121,7 @@ footer p {
 
 .hero-imagen {
     overflow: hidden;
-}
-.combo-imagen {
+}.combo-imagen {
     position: absolute;
 
     width: 45%;
@@ -2148,20 +2147,26 @@ footer p {
     display: block;
 
     object-fit: cover;
+    object-position: center;
 
     border-radius: 50%;
 
     transform: rotate(7deg);
 
     transition: transform 0.5s ease;
+
+    overflow: hidden;
 }
 
 .combo-card:hover .combo-foto {
     transform: rotate(0deg) scale(1.03);
 }
+
+
 /* =========================================================
    COMBO — MÓVIL
    ========================================================= */
+
 @media (max-width: 767px) {
 
     .combo-card {
@@ -2189,6 +2194,8 @@ footer p {
         align-items: center;
         justify-content: center;
 
+        padding: 10px 20px 25px;
+
         overflow: hidden;
     }
 
@@ -2200,9 +2207,16 @@ footer p {
         max-height: 85%;
 
         object-fit: cover;
+        object-position: center;
+
         border-radius: 50%;
 
         transform: rotate(7deg);
+
+        transition: transform 0.5s ease;
     }
 
+    .combo-card:hover .combo-foto {
+        transform: rotate(0deg) scale(1.03);
+    }
 }
