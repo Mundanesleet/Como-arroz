@@ -5,7 +5,6 @@
    ========================================================= */
 
 const NUMERO_WHATSAPP = "573224047068";
-
 /* =========================================================
    PRODUCTOS
    ========================================================= */
@@ -709,8 +708,8 @@ function mostrarProductos(
 
                             <i
                                 class="bi ${iconoCategoria(
-                                    producto.categoria
-                                )}"
+                producto.categoria
+            )}"
                             ></i>
 
                             <span>
@@ -719,15 +718,14 @@ function mostrarProductos(
 
                         </div>
 
-                        ${
-                            etiqueta
-                                ? `
+                        ${etiqueta
+                    ? `
                                     <span class="producto-etiqueta">
                                         ${etiqueta}
                                     </span>
                                   `
-                                : ""
-                        }
+                    : ""
+                }
 
                     </div>
 
@@ -945,11 +943,10 @@ function abrirSelectorVariantes(
                             type="radio"
                             name="varianteSeleccionada"
                             value="${indice}"
-                            ${
-                                indice === 0
-                                    ? "checked"
-                                    : ""
-                            }
+                            ${indice === 0
+                        ? "checked"
+                        : ""
+                    }
                         >
 
                         <span
@@ -960,16 +957,16 @@ function abrirSelectorVariantes(
                                 class="variante-nombre"
                             >
                                 ${escaparHTML(
-                                    variante.nombre
-                                )}
+                        variante.nombre
+                    )}
                             </span>
 
                             <span
                                 class="variante-precio"
                             >
                                 ${formatoPrecio(
-                                    variante.precio
-                                )}
+                        variante.precio
+                    )}
                             </span>
 
                         </span>
@@ -1011,10 +1008,10 @@ function confirmarVariante() {
     const variante =
         productoPendiente
             .variantes[
-                Number(
-                    seleccionado.value
-                )
-            ];
+        Number(
+            seleccionado.value
+        )
+        ];
 
 
     agregarProductoAlCarrito(
@@ -1340,30 +1337,29 @@ function actualizarCarrito() {
                         class="carrito-item-nombre"
                     >
                         ${escaparHTML(
-                            producto.nombre
-                        )}
+                producto.nombre
+            )}
                     </div>
 
-                    ${
-                        producto.variante
-                            ? `
+                    ${producto.variante
+                    ? `
                                 <div
                                     class="carrito-item-variante"
                                 >
                                     ${escaparHTML(
-                                        producto.variante
-                                    )}
+                        producto.variante
+                    )}
                                 </div>
                               `
-                            : ""
-                    }
+                    : ""
+                }
 
                     <div
                         class="carrito-item-precio"
                     >
                         ${formatoPrecio(
-                            producto.precio
-                        )}
+                    producto.precio
+                )}
                         c/u
                     </div>
 
@@ -1425,9 +1421,9 @@ function actualizarCarrito() {
                     class="carrito-item-total"
                 >
                     ${formatoPrecio(
-                        producto.precio *
-                        producto.cantidad
-                    )}
+                    producto.precio *
+                    producto.cantidad
+                )}
                 </div>
 
             `;
@@ -1827,7 +1823,7 @@ opcionesPago.forEach(
 
                     alerta.style.display =
                         opcion.value ===
-                        "tarjeta"
+                            "tarjeta"
 
                             ? "flex"
 
@@ -2198,10 +2194,9 @@ function generarMensajeWhatsApp() {
 
 
         mensaje +=
-            `📍 Punto de recogida: ${
-                document.getElementById(
-                    "puntoRecogida"
-                )?.value || ""
+            `📍 Punto de recogida: ${document.getElementById(
+                "puntoRecogida"
+            )?.value || ""
             }\n`;
 
     }
@@ -2222,11 +2217,10 @@ function generarMensajeWhatsApp() {
 
 
     mensaje +=
-        `\n💳 FORMA DE PAGO: ${
-            nombresPago[
-                metodoPago
-            ] ||
-            metodoPago
+        `\n💳 FORMA DE PAGO: ${nombresPago[
+        metodoPago
+        ] ||
+        metodoPago
         }\n`;
 
 
